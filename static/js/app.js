@@ -8,12 +8,20 @@ let takeName
 let click=false
 let choosePlayer=0  
 let objCheckMove
-let data2;
+let data2
+let host
+let nameRoom
+let createNew = false
+let controller = false
+let auth;
 
   
 
-Auth()
- function startGame(auth){ 
+//Auth()
+menuStart()
+selectMatch()
+startGame()
+ function startGame(){ 
  
   const divbtn = document.getElementById('divbtn')  
   const btnStart = document.getElementById('btnstart')
@@ -27,34 +35,47 @@ Auth()
         warnDiv.style.display='block'
         return false
       }
+      else if( controller ){
+        controller = true
+        return false;
+
+      }
       else{          
         
-           console.log(auth);
-        if(auth.resultado == 0){
-        setInterval(() => {
+         //  console.log(auth);
+          if(host && createNew){
+          console.log(createNew,host); 
+           setMines()
+           getMinesPlayer1()
+          }
+          if(host && createNew ==false){
+            getMinesPlayer2()
+          }
+          //  setInterval(() => {
+              
+          //      sendData()
+          //      getData() 
+          //  }, 1000);
           
-            sendData()
-            getData() 
-        }, 1000);
-        }
-       
-      
-        isMoving=true
-        contador=0      
-        container.innerHTML=''
-        container.style.borderImage='none' 
-        container.style.backgroundColor='#b1e2f2'
-        divbtn.style.borderRadius='50%'  
-        divbtn.style.margin='150px'        
-        divbtn.style.backgroundImage='url(./static/img/explosao.gif)'
-        divbtn.style.backgroundColor='black' 
-        container.style.flexDirection = 'column'
-          createCount()
-          createSquares()
-      }  
+        
+        
+        
+            isMoving=true
+            contador=0      
+            container.innerHTML=''
+            container.style.borderImage='none' 
+            container.style.backgroundColor='#b1e2f2'
+            divbtn.style.borderRadius='50%'  
+            divbtn.style.margin='150px'        
+            divbtn.style.backgroundImage='url(./static/img/explosao.gif)'
+            divbtn.style.backgroundColor='black' 
+            container.style.flexDirection = 'column'
+              createCount()
+              createSquares()
+    //    }  
     }
   
-   
+  }
   }
 function menuStart(){
   container.innerHTML=''
@@ -103,11 +124,15 @@ function menuStart(){
    let getName=document.getElementById('inputName')
    let warnDiv =document.createElement('div')
    warnDiv.id = 'warnDiv'
-   warnDiv.innerHTML='Preencha o campo Apelido'
-   warnDiv.style.color='red'
+   warnDiv.innerHTML='Preencha o campo Apelido'  
+   
    divStart.appendChild(warnDiv)
    warnDiv.style.display='none'
-  getName.onchange = ()=>{ takeName=getName.value}
+  getName.onchange = ()=>{ 
+    takeName = getName.value
+   
+  
+  }
 
  
 
@@ -128,18 +153,104 @@ singlePlayer.innerHTML = 'Singleplayer'
 multiPlayer.innerHTML = 'Multiplayer'
 selectMatchEvents(singlePlayer,multiPlayer)
 }
+
 function selectMatchEvents(singlePlayer,multiPlayer){
- let host = false
- const divHost = document.querySelector('#divHost')
-  singlePlayer.onclick = () =>{ host = false
-   divHost.outerHTML = ''
-  }
 
-  multiPlayer.onclick = ()=>{ host = true 
+    const divHost = document.querySelector('#divHost')
+    singlePlayer.onclick = () =>{
+    controller = false  
+    host = false
     divHost.outerHTML = ''
-    
   }
+  multiPlayer.onmouseover = () =>{
+    Auth()
+  }
+  multiPlayer.onclick = ()=>{     
+    host = true 
+    if(host){
+   
+   
+    }
+    console.log(auth)
+      if(host && auth==1){
+      divHost.innerHTML = ''
+      let room  = document.createElement('div')
+      room.id = 'room'
+      divHost.appendChild(room)
+      let backMutil = document.createElement('input')
+      divHost.appendChild(backMutil)
+      backMutil.setAttribute('type','button')
+      backMutil.setAttribute('value','Voltar')
+      backMutil.id = 'backMulti'
+      backMutil.onclick = () =>{
+        divHost.innerHTML = ''
+        createNew =false
+        selectMatch()
+        
+      }
 
+      nameRoom = document.createElement('input')
+      nameRoom.setAttribute('type','text');     
+      room.appendChild(nameRoom)
+      nameRoom.setAttribute('placeholder','Nome da sala')
+      nameRoom.id = 'nameRoom'
+      let createRoom = document.createElement('input')
+      createRoom.setAttribute('type','button')
+      createRoom.setAttribute('value','Criar  Nova')
+      createRoom.id = 'createRoom'
+      room.appendChild(createRoom)
+    
+      createRoom.onclick = () =>{
+        createNew = true
+        nameRoom.setAttribute('placeholder','Nova sala')
+          if(host && createNew){
+      
+        }  
+        createRoom.style.display = 'none'
+      }
+    
+    let confirm  = document.createElement('input')
+    confirm.setAttribute('type','button')
+    confirm.setAttribute('value','confirmar')
+    confirm.id  = 'confirm'
+    room.appendChild(confirm)
+      let confirmClicked = false
+    
+      console.log(createNew,host); 
+      let cont5 = 0
+      getDataRoom =  confirm.onclick  = () =>{
+        confirmClicked = true
+      
+        if(createNew && nameRoom.value!= "" && confirmClicked && host){
+          
+      // room.innerHTML = `Sala ${nameRoom.value} criada com sucesso`
+        setFirstPlayer() 
+      
+      
+    //certo
+        }
+        if(nameRoom.value!= "" && confirmClicked && createNew ==false){     
+          
+          room.innerHTML = `Logado na sala ${nameRoom.value}`
+      //certo       
+      
+      
+
+        }
+        if(confirmClicked && nameRoom.value == ""  && cont5<1 ){
+        cont5++;
+        let roomWarning = document.createElement('p');
+        room.appendChild(roomWarning)
+        roomWarning.innerHTML = '*Nome da sala obrigatório'
+        roomWarning.id = 'roomWarning' 
+        return false
+        }
+      
+      
+      } 
+      
+    }
+  }
 }
 
 
@@ -356,8 +467,8 @@ function detectMines(){
       var grid = document.querySelector('.grid')
       grid.style.backgroundImage='url(./static/img/explosao.gif)'},1500)
     setTimeout(function(){
-      createForm()
-      submitForm()
+     // createForm()
+      //submitForm()
       menuStart()
       selectMatch()
 
@@ -378,8 +489,8 @@ function detectMines(){
   
    // pCounter.innerHTML=`Você Ganhou com ${contador} pontos`
       setTimeout(()=>{
-        createForm()
-        submitForm()
+       // createForm()
+       // submitForm()
         menuStart()
         selectMatch()
       },3000)

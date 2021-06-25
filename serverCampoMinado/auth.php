@@ -6,16 +6,17 @@
    
 $token2 = "fdptadsphp";
 if(strcmp($token2,$token)==0){
- echo 'Autenticado com sucesso'."\n";
- echo '*{"resultado":0
+ echo '{"mensagem": "Autenticado com sucesso",';
+ echo '"resultado":1
         }'     
      ;
-
+return true;
 }
 else{
-    echo 'Não foi possível conectar, server offline';
+    echo '"messagem2": "Não foi possível conectar, server offline"';
+    return false;
  } 
-
+ return false;
 
  }
 

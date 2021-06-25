@@ -1,8 +1,8 @@
 <?php
 require_once('properties.php');
-
-getData();
-function getData(){
+require_once('auth.php');
+$auth =  Auth();
+ if( $auth){
  $objetoMysqli = geraMysqli();
  $token='fdptadsphp';
  if($objetoMysqli->connect_error){//se erro existe bd

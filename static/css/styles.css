@@ -11,9 +11,9 @@ body{
     margin:auto;
     height:100%;
     min-height:500px;    
-    flex-direction: row;
-    border-radius: 20px;
+    flex-direction: row;    
     -moz-border-radius: 20px;
+    border-radius: 20px;
     border: 1px solid transparent;
     text-align: center;
     font-size: 180%;  
@@ -123,8 +123,13 @@ body{
 
 }
 #warnMessage{
-    color: #dbe8f1ef;
+    color: red;
+    font-size: 12px;
 
+}
+#warnDiv{
+    color: red;
+    font-size: 12px;
 }
 #inputName{
     border-radius: 10px;
@@ -154,7 +159,7 @@ body{
     font-style: italic;
     opacity: 1;
     text-transform: uppercase;
-    background-image: url(..../serverCampoMinado/explosao.gif)
+ 
 }
 
 #inputName:-ms-input-placeholder { /* IE10+ */ 
@@ -176,6 +181,7 @@ body{
     background-size: cover;
     border-radius: 20px;
     box-shadow: 3px 3px 0 3px #930;
+    color: White;
   
 
   
@@ -183,7 +189,7 @@ body{
 } 
 #divStart :hover,#divHost :hover{
     width: 80%;
-    margin-left: 2px;
+   
     
  
 
@@ -223,5 +229,82 @@ body{
     padding-right: 5px;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);  
 }
+#room{
+    width: 100%;
+    margin: auto;
+    background-color: black;
+    height: 200%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    
+}
 
+#nameRoom{
+    border-radius: 10px;
+    height: 30px;
+    font-size: 9px;
+    width: 100px; 
+    text-transform:uppercase;  
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+     
+}
+#nameRoom::-webkit-input-placeholder { /* Chrome, Safari, Opera */
+    color: #6db5f1;
+    font-style: italic;
+    text-transform: uppercase;
+    
+  }
+  
+
+#createRoom{
+   
+    border: 0;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    color: #FFF;
+    background: #F60;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    border-radius: 0.5em;
+    box-shadow: 3px 3px 0 3px #930;
+    cursor: pointer;
+    margin: auto;
+  
+ 
+    
+
+}
+#confirm{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    border: 0;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    color: #FFF;
+    background: #F60;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    border-radius: 0.5em;
+    box-shadow: 3px 3px 0 3px #930;
+    cursor: pointer;
+}
+#roomWarning{
+    color: red;
+    font-size: 12px;
+}
+#backMulti{
+    width: 80px;
+    border: 0;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    color: #FFF;
+    background: #F60;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    border-radius: 0.5em;
+    box-shadow: 3px 3px 0 3px #930;
+    cursor: pointer;
+}
 
